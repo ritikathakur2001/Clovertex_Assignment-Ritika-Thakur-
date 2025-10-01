@@ -1,3 +1,0 @@
-Sample_Name,VCF_File_Path,Gender,Case_Control
-Sample_001,/home/ritika/vep_nextflow_pipeline/test1_data_1.vcf,Male,Case
-Sample_002,/home/ritika/vep_nextflow_pipeline/test2_data_1.vcf,Female,Control
