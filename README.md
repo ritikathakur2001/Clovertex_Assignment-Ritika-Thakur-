@@ -25,7 +25,7 @@ tar -xvzf homo_sapiens_vep_115_GRCh37.tar.gz
 This created the directory:
 ~/.vep/homo_sapiens/115_GRCh37/...
 
-FASTA Reference
+FASTA Reference: 
 I used the file GRCh37.primary.fa.gz (already available from GENCODE/Ensembl).
 
 Code to be run in bash:-
@@ -116,8 +116,8 @@ Stick to cache + FASTA only for annotation (simpler and faster).
 Re-download and validate files whenever CRC errors appeared.
 Ensure the cache version exactly matched my VEP version.
 Manage space carefully, since the cache and FASTA files are quite large.
-# Another approach for this assignment could be to combine cache/FASTA with ClinVar or other custom annotation sources, but my final results were achieved successfully with cache + FASTA only.
+## Another approach for this assignment could be to combine cache/FASTA with ClinVar or other custom annotation sources, but my final results were achieved successfully with cache + FASTA only.
 
-# The downstream Python analysis (counts, unique genes/traits, pathogenic variants, chromosome distribution) was done in a separate Jupyter Notebook, which I will include as part of the final submission.
+## The downstream Python analysis (counts, unique genes/traits, pathogenic variants, chromosome distribution) was done in a separate Jupyter Notebook, which I will include as part of the final submission.
 
 
