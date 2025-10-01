@@ -1,0 +1,3 @@
+task_id	hash	native_id	name	status	exit	submit	duration	realtime	%cpu	peak_rss	peak_vmem	rchar	wchar
+1	b1/57718b	9940	annotate_vcf (test1_data_1)	COMPLETED	0	2025-10-01 13:55:37.087	15.2s	11.1s	109.6%	587 MB	644.4 MB	38.7 MB	12 MB
+2	39/f59ee5	9981	annotate_vcf (test2_data_1)	FAILED	137	2025-10-01 13:55:52.321	5m 7s	5m 7s	-	-	-	-	-
