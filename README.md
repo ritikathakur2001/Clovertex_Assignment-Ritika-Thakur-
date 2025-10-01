@@ -121,3 +121,112 @@ Manage space carefully, since the cache and FASTA files are quite large.
 ## The downstream Python analysis (counts, unique genes/traits, pathogenic variants, chromosome distribution) was done in a separate Jupyter Notebook, which I will include as part of the final submission.
 
 
+# Assignment 2: Nextflow Pipeline for VEP Annotation
+This assignment was about creating a Nextflow DSL2 pipeline for bulk annotation of VCF files using the Ensembl Variant Effect Predictor (VEP) in a containerized environment.
+The pipeline can:
+-Take input from a samples.csv file
+-Run VEP annotation in Docker containers
+-Process multiple VCF files in parallel
+-Produce annotated .vcf.gz outputs
+-Generate workflow reports (report.html, timeline.html, trace.txt)
+
+**Steps I Followed**
+
+**Step 1: Preparing Input Data**
+I placed my test VCF files in the working directory:
+test1_data_1.vcf
+test2_data_1.vcf
+
+**I created a (samples.csv) file with the format:**
+
+Sample_Name,VCF_File_Path,Gender,Case_Control
+Sample_001,/home/ritika/vep_nextflow_pipeline/test1_data_1.vcf,Male,Case
+Sample_002,/home/ritika/vep_nextflow_pipeline/test2_data_1.vcf,Female,Control
+
+**Step 2: Writing the Pipeline (main.nf)**
+-I wrote a Nextflow DSL2 pipeline (main.nf) with a process called annotate_vcf:
+-Reads each .vcf file from the CSV
+-Runs VEP inside Docker
+-Produces .annotated.vcf.gz files
+
+**Step 3: Configuring Docker Mounts (nextflow.config)**
+
+I needed to provide correct paths for cache and FASTA:
+params {
+  cache_dir = "/mnt/d/clovertex_assignment"
+  fasta     = "/home/ritika/vep_minidata/GRCh37.primary.fa"
+  vep_image = "ensemblorg/ensembl-vep:release_115.0"
+  outdir    = "${projectDir}/results"
+}
+
+-This ensures VEP finds both the cache and the reference genome inside the container.
+
+**Step 4: Running the Pipeline**
+I ran my pipeline with Docker enabled:
+
+nextflow run main.nf -with-docker \
+  -with-report report.html \
+  -with-timeline timeline.html \
+  -with-trace trace.txt
+
+-Later, when fixing errors, I also used:
+
+nextflow run main.nf -with-docker -resume \
+  -with-report report.html \
+  -with-timeline timeline.html \
+  -with-trace trace.txt
+
+**Step 5: Debugging**
+I used several commands to debug issues:
+
+-Check files exist:
+ls -lh
+cat samples.csv
+
+-View logs:
+-tail -n 120 .nextflow.log
+
+-Explore work directory:
+cd work/<hash>/
+cat .command.sh
+cat .command.err
+cat .command.out
+
+
+-Inspect Docker mounts:
+docker run --rm -v /home/ritika/.vep:/opt/vep/.vep:ro ensemblorg/ensembl-vep:release_115.0 ls -lh /opt/vep/.vep
+
+
+## Key Decisions I Made
+
+Avoided tuple input channels: Since my VCFs were simple, I directly fed file paths without tuple destructuring.
+
+Cache directory choice: I pointed --dir_cache to /mnt/d/clovertex_assignment where my cache was extracted.
+
+Memory optimization: I reduced memory to 3 GB and used --fork 1 to fit within my WSL2 resources.
+
+Docker image: I switched to ensemblorg/ensembl-vep:release_115.0, which matched my cache version.
+
+**Results**
+After several iterations, the pipeline successfully generated annotated VCF outputs.The reports (report.html, timeline.html, trace.txt) were also generated to track execution.
+
+test1_data_1.annotated.vcf.gz
+test2_data_1.annotated.vcf.gz
+test2_data_1.annotated.vcf.gz_warnings.txt
+
+-All the files below generated or used during the assignment is uploaded:
+samples.csv  test1_data_1.vcf  test2_data_1.vcf   
+test2_data_1.annotated.vcf.gz  
+test2_data_1.annotated.vcf.gz_warnings.txt  
+report.html  timeline.html  trace.txt
+
+**Screenshots of Results**
+<img width="828" height="207" alt="image" src="https://github.com/user-attachments/assets/4c84945d-6973-406c-ab28-d60a650a610e" />
+
+<img width="819" height="686" alt="image" src="https://github.com/user-attachments/assets/a7c0dcd5-145a-42aa-acd9-33ee7ed51f92" />
+
+# Other options taht can be tried
+- Using Quay.io images directly (quay.io/ensemblorg/ensembl-vep:109.3)
+- Running VEP without cache (slower, but avoids cache mismatch)
+- Using Singularity instead of Docker for HPC compatibility
+
