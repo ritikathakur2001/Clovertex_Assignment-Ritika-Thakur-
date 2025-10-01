@@ -225,8 +225,7 @@ report.html  timeline.html  trace.txt
 
 <img width="819" height="686" alt="image" src="https://github.com/user-attachments/assets/a7c0dcd5-145a-42aa-acd9-33ee7ed51f92" />
 
-# Other options taht can be tried
+# Other options could be tried
 - Using Quay.io images directly (quay.io/ensemblorg/ensembl-vep:109.3)
 - Running VEP without cache (slower, but avoids cache mismatch)
-- Using Singularity instead of Docker for HPC compatibility
 
