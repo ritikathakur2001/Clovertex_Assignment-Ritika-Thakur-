@@ -106,6 +106,23 @@ PLots showing visual representation of the annotated files of test2_data2:
 
 <img width="846" height="507" alt="image" src="https://github.com/user-attachments/assets/b327bd2a-f267-4c23-8bae-875ce701dd40" />
 
+**File info:**
+
+Inside test1_data_annotated_analysis/csv_outputs/ (same applies to test2_data_annotated_analysis/csv_outputs/):
+genes_top.csv → List of unique genes with counts of variants per gene.
+pathogenic_variants.csv → Variants classified as pathogenic/likely pathogenic.
+pathogenic_variants.xlsx → Same pathogenic variants but formatted in Excel for easier viewing.
+per_chromosome_counts.csv → Count of variants per chromosome.
+per_chromosome_missing_snp.csv → Variants without SNP IDs, grouped by chromosome.
+traits_top.csv → Unique traits/disease conditions associated with variants.
+vcf_analysis_log.json → Structured JSON log of all results.
+vcf_analysis_log.txt → Human-readable text log summarizing the run.
+
+Top-level files:
+test1_data_annotated.vcf / test2_data_annotated.vcf → Original VEP-annotated VCF outputs.
+test1_data_annotated.vcf_summary.html / test2_data_annotated.vcf_summary.html → VEP-generated HTML summaries of the annotations.
+test1_data_annotated_analysis/, test2_data_annotated_analysis/ → Post-processing results folders containing CSVs + logs.
+Test1_Test2_data_annotation_analysis.ipynb → jupyter notebook scripts for annotated file analysis 
 
 **NOTES**
 I began by setting up the VEP environment and downloading the required reference files. Initially, I tried using multiple sources (FASTA, GTF, and also ClinVar as a custom annotation). However, I ran into several issues along the way — corrupted downloads, very large FASTA size taking a lot of space, and repeated version mismatches between my installed VEP (115) and the available cache.
