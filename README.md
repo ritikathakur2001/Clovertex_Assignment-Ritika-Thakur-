@@ -3,7 +3,8 @@
 
 **Objective:-** The goal of this assignment was to annotate two given VCF files using Ensembl VEP in offline mode with a local cache and reference FASTA, and then carry out downstream analysis in Python (covered separately in a Jupyter Notebook).
 
-![Assignment 1 Flowchart](assignment_1_genomics_annotation/assignment1_flowchart.png)
+# Flowchart of assignment1
+<img width="768" height="25" alt="assignment1_flowchart" src="https://github.com/user-attachments/assets/84ceff47-2252-4b48-b7c7-96bab2601bc6" />
 
 **Step 1: Environment Setup**
 I worked inside WSL2 with a dedicated conda environment.
@@ -149,7 +150,9 @@ The pipeline can:
 -Produce annotated .vcf.gz outputs
 -Generate workflow reports (report.html, timeline.html, trace.txt)
 
-![Assignment 2 Flowchart](assignment_2_nextflow_pipeline/assignment2_flowchart.png)
+# Flowchart of assignment2
+<img width="768" height="66" alt="assignment2_flowchart" src="https://github.com/user-attachments/assets/99786a6e-e92f-4295-9dfd-8ea60ca8adec" />
+
 
 **Steps I Followed**
 
