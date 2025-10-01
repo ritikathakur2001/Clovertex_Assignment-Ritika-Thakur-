@@ -1,0 +1,102 @@
+VCF Analysis Report
+===================
+
+{
+  "vcf_path": "D:\\clovertex_assignment\\test2_data_annotated.vcf",
+  "timestamp": "2025-10-01T07:53:11.789555",
+  "total_variants": 49323,
+  "per_chrom_counts": {
+    "1": 49323
+  },
+  "per_chrom_num_snp_ids": {},
+  "per_chrom_missing_snp_counts": {
+    "1": 49323
+  },
+  "unique_genes": 242,
+  "top_genes": [
+    [
+      "VAV3",
+      83
+    ],
+    [
+      "CASZ1",
+      76
+    ],
+    [
+      "NTNG1",
+      75
+    ],
+    [
+      "AGL",
+      58
+    ],
+    [
+      "OLFM3",
+      57
+    ],
+    [
+      "COL11A1",
+      55
+    ],
+    [
+      "AKNAD1",
+      49
+    ],
+    [
+      "PEX14",
+      39
+    ],
+    [
+      "PRKCZ",
+      33
+    ],
+    [
+      "KIF1B",
+      33
+    ],
+    [
+      "RP11-202K23.1",
+      32
+    ],
+    [
+      "CELSR2",
+      29
+    ],
+    [
+      "DBT",
+      27
+    ],
+    [
+      "C1orf222",
+      26
+    ],
+    [
+      "GPSM2",
+      25
+    ],
+    [
+      "AGRN",
+      24
+    ],
+    [
+      "UBE4B",
+      22
+    ],
+    [
+      "CDC14A",
+      21
+    ],
+    [
+      "RP11-157N3.1",
+      20
+    ],
+    [
+      "KIAA1324",
+      20
+    ]
+  ],
+  "unique_traits": 0,
+  "top_traits": [],
+  "pathogenic_variants": [],
+  "errors": []
+}

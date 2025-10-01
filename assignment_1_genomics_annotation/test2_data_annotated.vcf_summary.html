@@ -1,0 +1,200 @@
+<html>
+<head>
+  <title>VEP summary</title>
+  <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+  <script type="text/javascript">
+    google.load('visualization', '1', {packages: ['corechart','table']});
+  </script>
+  <script type="text/javascript">
+    
+    function init() {
+      // charts
+      var var_class_pie = drawPie('var_class_pie', 'Variant classes', google.visualization.arrayToDataTable([['Variant class','Count'],['insertion',81],['deletion',292],['SNV',48951]]), null);
+var var_class_table = drawTable('var_class_table', 'Variant classes', google.visualization.arrayToDataTable([['Variant class','Count'],['insertion',81],['deletion',292],['SNV',48951]]));
+
+          google.visualization.events.addListener(var_class_pie, 'select', function() {
+            var_class_table.setSelection(var_class_pie.getSelection());
+          });
+          google.visualization.events.addListener(var_class_table, 'select', function() {
+            var_class_pie.setSelection(var_class_table.getSelection());
+          });
+        var var_cons_pie = drawPie('var_cons_pie', 'Consequences (most severe)', google.visualization.arrayToDataTable([['Consequence type','Count'],['splice_acceptor_variant',2],['splice_donor_variant',5],['stop_gained',13],['frameshift_variant',16],['stop_lost',1],['missense_variant',190],['splice_region_variant',4],['splice_donor_region_variant',2],['splice_polypyrimidine_tract_variant',2],['synonymous_variant',34],['5_prime_UTR_variant',5],['3_prime_UTR_variant',40],['non_coding_transcript_exon_variant',59],['intron_variant',814],['upstream_gene_variant',91],['downstream_gene_variant',84],['intergenic_variant',47962]]), {slices: [{color: "#ff7f50"}, {color: "#ff7f50"}, {color: "#ff0000"}, {color: "#ff69b4"}, {color: "#ff0000"}, {color: "#ffd700"}, {color: "#ff7f50"}, {}, {}, {color: "#76ee00"}, {}, {}, {}, {color: "#02599c"}, {color: "#a2b5cd"}, {color: "#a2b5cd"}, {color: "gray"}]});
+var var_cons_table = drawTable('var_cons_table', 'Consequences (most severe)', google.visualization.arrayToDataTable([['Consequence type','Count'],['splice_acceptor_variant',2],['splice_donor_variant',5],['stop_gained',13],['frameshift_variant',16],['stop_lost',1],['missense_variant',190],['splice_region_variant',4],['splice_donor_region_variant',2],['splice_polypyrimidine_tract_variant',2],['synonymous_variant',34],['5_prime_UTR_variant',5],['3_prime_UTR_variant',40],['non_coding_transcript_exon_variant',59],['intron_variant',814],['upstream_gene_variant',91],['downstream_gene_variant',84],['intergenic_variant',47962]]));
+
+          google.visualization.events.addListener(var_cons_pie, 'select', function() {
+            var_cons_table.setSelection(var_cons_pie.getSelection());
+          });
+          google.visualization.events.addListener(var_cons_table, 'select', function() {
+            var_cons_pie.setSelection(var_cons_table.getSelection());
+          });
+        var consequences_pie = drawPie('consequences_pie', 'Consequences (all)', google.visualization.arrayToDataTable([['Consequence type','Count'],['splice_acceptor_variant',6],['splice_donor_variant',17],['stop_gained',66],['frameshift_variant',63],['stop_lost',1],['missense_variant',623],['splice_region_variant',61],['splice_donor_region_variant',16],['splice_polypyrimidine_tract_variant',16],['synonymous_variant',103],['5_prime_UTR_variant',32],['3_prime_UTR_variant',84],['non_coding_transcript_exon_variant',222],['intron_variant',4494],['NMD_transcript_variant',299],['non_coding_transcript_variant',926],['upstream_gene_variant',965],['downstream_gene_variant',1107],['intergenic_variant',48031]]), {slices: [{color: "#ff7f50"}, {color: "#ff7f50"}, {color: "#ff0000"}, {color: "#ff69b4"}, {color: "#ff0000"}, {color: "#ffd700"}, {color: "#ff7f50"}, {}, {}, {color: "#76ee00"}, {}, {}, {}, {color: "#02599c"}, {}, {}, {color: "#a2b5cd"}, {color: "#a2b5cd"}, {color: "gray"}]});
+var consequences_table = drawTable('consequences_table', 'Consequences (all)', google.visualization.arrayToDataTable([['Consequence type','Count'],['splice_acceptor_variant',6],['splice_donor_variant',17],['stop_gained',66],['frameshift_variant',63],['stop_lost',1],['missense_variant',623],['splice_region_variant',61],['splice_donor_region_variant',16],['splice_polypyrimidine_tract_variant',16],['synonymous_variant',103],['5_prime_UTR_variant',32],['3_prime_UTR_variant',84],['non_coding_transcript_exon_variant',222],['intron_variant',4494],['NMD_transcript_variant',299],['non_coding_transcript_variant',926],['upstream_gene_variant',965],['downstream_gene_variant',1107],['intergenic_variant',48031]]));
+
+          google.visualization.events.addListener(consequences_pie, 'select', function() {
+            consequences_table.setSelection(consequences_pie.getSelection());
+          });
+          google.visualization.events.addListener(consequences_table, 'select', function() {
+            consequences_pie.setSelection(consequences_table.getSelection());
+          });
+        var coding_pie = drawPie('coding_pie', 'Coding consequences', google.visualization.arrayToDataTable([['Consequence type','Count'],['stop_gained',66],['frameshift_variant',63],['stop_lost',1],['missense_variant',623],['synonymous_variant',103]]), {slices: [{color: "#ff0000"}, {color: "#ff69b4"}, {color: "#ff0000"}, {color: "#ffd700"}, {color: "#76ee00"}]});
+var coding_table = drawTable('coding_table', 'Coding consequences', google.visualization.arrayToDataTable([['Consequence type','Count'],['stop_gained',66],['frameshift_variant',63],['stop_lost',1],['missense_variant',623],['synonymous_variant',103]]));
+
+          google.visualization.events.addListener(coding_pie, 'select', function() {
+            coding_table.setSelection(coding_pie.getSelection());
+          });
+          google.visualization.events.addListener(coding_table, 'select', function() {
+            coding_pie.setSelection(coding_table.getSelection());
+          });
+        var chr_bar = drawBar('chr_bar', 'Variants by chromosome', google.visualization.arrayToDataTable([['Chromosome','Count'],['1',49324]]), {legend: {position: "none"}});
+var chr_table = drawTable('chr_table', 'Variants by chromosome', google.visualization.arrayToDataTable([['Chromosome','Count'],['1',49324]]));
+
+          google.visualization.events.addListener(chr_bar, 'select', function() {
+            chr_table.setSelection(chr_bar.getSelection());
+          });
+          google.visualization.events.addListener(chr_table, 'select', function() {
+            chr_bar.setSelection(chr_table.getSelection());
+          });
+        var chr_1_area = drawArea('chr_1_area', 'Distribution of variants on chromosome 1', google.visualization.arrayToDataTable([['Position (mb)','Count'],['0',68],['1',208],['2',261],['3',286],['4',354],['5',336],['6',239],['7',290],['8',152],['9',265],['10',278],['11',281],['12',296],['13',84],['14',339],['15',330],['16',191],['17',386],['18',338],['19',320],['20',330],['21',208],['22',291],['23',195],['24',197],['25',228],['26',205],['27',156],['28',102],['29',169],['30',290],['31',230],['32',156],['33',172],['34',302],['35',207],['36',157],['37',239],['38',233],['39',196],['40',238],['41',219],['42',143],['43',330],['44',163],['45',299],['46',176],['47',232],['48',241],['49',134],['50',79],['51',86],['52',122],['53',273],['54',219],['55',316],['56',227],['57',290],['58',228],['59',210],['60',199],['61',267],['62',239],['63',215],['64',251],['65',230],['66',198],['67',235],['68',223],['69',167],['70',159],['71',144],['72',137],['73',100],['74',166],['75',151],['76',257],['77',190],['78',159],['79',179],['80',184],['81',264],['82',204],['83',151],['84',178],['85',236],['86',196],['87',172],['88',232],['89',150],['90',192],['91',171],['92',181],['93',142],['94',443],['95',221],['96',158],['97',301],['98',316],['99',196],['100',215],['101',192],['102',226],['103',141],['104',142],['105',186],['106',182],['107',161],['108',184],['109',211],['110',439],['111',253],['112',249],['113',180],['114',195],['115',216],['116',276],['117',217],['118',188],['119',163],['120',150],['121',17],['122',0],['123',0],['124',0],['125',0],['126',0],['127',0],['128',0],['129',0],['130',0],['131',0],['132',0],['133',0],['134',0],['135',0],['136',0],['137',0],['138',0],['139',0],['140',0],['141',0],['142',1],['143',2],['144',16],['145',71],['146',110],['147',130],['148',6],['149',58],['150',146],['151',153],['152',173],['153',206],['154',230],['155',174],['156',527],['157',203],['158',258],['159',263],['160',285],['161',351],['162',289],['163',240],['164',221],['165',263],['166',166],['167',308],['168',237],['169',225],['170',164],['171',271],['172',188],['173',158],['174',79],['175',264],['176',127],['177',190],['178',147],['179',159],['180',182],['181',223],['182',203],['183',242],['184',153],['185',176],['186',182],['187',189],['188',153],['189',129],['190',134],['191',130],['192',154],['193',180],['194',175],['195',139],['196',161],['197',289],['198',164],['199',170],['200',206],['201',451],['202',206],['203',273],['204',252],['205',299],['206',145],['207',322],['208',292],['209',280],['210',217],['211',213],['212',185],['213',214],['214',253],['215',227],['216',337],['217',222],['218',298],['219',201],['220',206],['221',186],['222',198],['223',216],['224',150],['225',154],['226',215],['227',169],['228',202],['229',224],['230',330],['231',220],['232',283],['233',271],['234',274],['235',218],['236',340],['237',766],['238',248],['239',211],['240',299],['241',347],['242',266],['243',124],['244',265],['245',319],['246',208],['247',245],['248',127],['249',36]]), {hAxis: {title: "Position (mb)", textStyle: {fontSize: 8}}, legend: {position: "none"}});
+var protein_bar = drawBar('protein_bar', 'Position in protein', google.visualization.arrayToDataTable([['Position in protein (percentile)','Count'],['00-10%',107],['10-20%',80],['20-30%',62],['30-40%',84],['40-50%',100],['50-60%',88],['60-70%',77],['70-80%',97],['80-90%',85],['90-100%',76]]), {hAxis: {title: "Position in protein (percentile)", textStyle: {fontSize: 10}}, legend: {position: "none"}});
+
+    }
+    
+    function drawPie(id, title, data, options) {    
+      var pie = new google.visualization.PieChart(document.getElementById(id));
+      pie.draw(data, options);
+      return pie;
+    }
+    function drawBar(id, title, data, options) {
+      var bar = new google.visualization.ColumnChart(document.getElementById(id));
+      bar.draw(data, options);
+      return bar;
+    }
+    function drawTable(id, title, data) {
+      var table = new google.visualization.Table(document.getElementById(id));
+      table.draw(data, null);
+      return table;
+    }
+    function drawLine(id, title, data, options) {
+      var line = new google.visualization.LineChart(document.getElementById(id));
+      line.draw(data, options);
+      return line;
+    }
+    function drawArea(id, title, data, options) {
+      var area = new google.visualization.AreaChart(document.getElementById(id));
+      area.draw(data, options);
+      return area;
+    }
+    google.setOnLoadCallback(init);
+  </script>
+  
+  
+  <style type="text/css">
+    body {
+      font-family: arial, sans-serif;
+      margin: 0px;
+      padding: 0px;
+    }
+    
+    a {color: #36b;}
+    a.visited {color: #006;}
+    
+    .stats_table {
+      margin: 5px;
+      table-layout: fixed;
+      width: 100%;
+    }
+
+    pre {
+      white-space: normal;
+      word-break: keep-all;
+    }
+
+    td {
+      padding: 5px;
+      word-break: break-word;
+    }
+
+    td:nth-child(2) {
+      width: 80%;
+    }
+
+    th.gradient {
+      height: auto;
+    }
+
+    .stats_table tr:nth-child(odd) {
+      background-color: #f0f0f0;
+    }
+    
+    h3 {
+      color: #666;
+    }
+    
+    .masthead {
+      background-color: white;
+      color: rgb(204, 221, 255);
+      height: 80px;
+      width: 100%;
+      padding: 0px;
+    }
+    
+    .main {
+      padding: 10px;
+    }
+    
+    .gradient {
+      background: #333366; /* Old browsers */
+      background: -moz-linear-gradient(left,  #333366 0%, #ffffff 100%); /* FF3.6+ */
+      background: -webkit-gradient(linear, left top, right top, color-stop(0%,#333366), color-stop(100%,#ffffff)); /* Chrome,Safari4+ */
+      background: -webkit-linear-gradient(left,  #333366 0%,#ffffff 100%); /* Chrome10+,Safari5.1+ */
+      background: -o-linear-gradient(left,  #333366 0%,#ffffff 100%); /* Opera 11.10+ */
+      background: -ms-linear-gradient(left,  #333366 0%,#ffffff 100%); /* IE10+ */
+      background: linear-gradient(to right,  #333366 0%,#ffffff 100%); /* W3C */
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#333366', endColorstr='#ffffff',GradientType=1 ); /* IE6-9 */
+      
+      padding: 0px;
+      height: 80px;
+      width: 700px;
+    }
+    
+    .main_content {
+      margin-left: 300px;
+    }
+    
+    .sidemenu {
+      width: 260px;
+      position: fixed;
+      border-style: solid;
+      border-width: 2px;
+      border-color: rgb(51, 51, 102);
+    }
+    
+    .sidemenu_head {
+      width: 250px;
+      background-color: rgb(51, 51, 102);
+      color: rgb(204, 221, 255);
+      padding: 5px;
+    }
+    
+    .sidemenu_body {
+      width: 250px;
+      padding: 5px;
+    }
+  </style>
+</head>
+<body>
+<div id="masthead" class="masthead">
+  <div style="float: left; display: inline; padding: 10px; height: 80px;">
+    <a href="http://www.ensembl.org/"><img src="http://static.ensembl.org/i/e-ensembl.png" width="185" height="45" alt="Ensembl"></a>
+  </div>
+  
+  <div style="float: right; display: inline; height: 80px; background: white; padding: 10px;">
+    <a href="http://www.ensembl.org/vep"><img src="http://www.ensembl.org/img/vep_logo.png" width="111" height="50" alt="VEP"></a>
+  </div>
+  <div class="gradient">
+  </div>
+</div>
+<div class="main">
+<div class="sidemenu"><div class="sidemenu_head">Links</div><div class="sidemenu_body"><ul><li><a href="#masthead">Top of page</a></li><li><a href="#run_stats">VEP run statistics</a></li><li><a href="#data_version">Data version</a></li><li><a href="#gen_stats">General statistics</a></li><li><a href="#var_class">Variant classes</a></li><li><a href="#var_cons">Consequences (most severe)</a></li><li><a href="#consequences">Consequences (all)</a></li><li><a href="#coding">Coding consequences</a></li><li><a href="#chr">Variants by chromosome</a></li><li><a href="#protein">Position in protein</a></li></ul></div></div><div class='main_content'><h3 id="run_stats">VEP run statistics</h3><table class="stats_table"><tr><td>VEP version (API)</td><td> 115.2 (115)</td></tr><tr><td>Annotation sources</td><td>Cache: <kbd>/mnt/d/clovertex_assignment/homo_sapiens/115_GRCh37</kbd></td></tr><tr><td>Species</td><td>homo_sapiens</td></tr><tr><td>Command line options</td><td><pre>--cache  --dir_cache /mnt/d/clovertex_assignment/ --fasta /home/ritika/vep_minidata/GRCh37.primary.fa --force_overwrite --input_file /mnt/d/clovertex_assignment/test2_data 1.vcf --offline --output_file /mnt/d/clovertex_assignment/test2_data_annotated.vcf --vcf</pre></td></tr><tr><td>Start time</td><td>2025-10-01 01:24:20</td></tr><tr><td>End time</td><td>2025-10-01 01:27:34</td></tr><tr><td>Run time</td><td>194 seconds</td></tr><tr><td>Input file</td><td><pre>/mnt/d/clovertex_assignment/test2_data 1.vcf</pre></td></tr><tr><td>Output file</td><td><pre>/mnt/d/clovertex_assignment/test2_data_annotated.vcf</pre></td></tr></table><h3 id="data_version">Data version</h3>No data version information available.<h3 id="gen_stats">General statistics</h3><table class="stats_table"><tr><td>Lines of input read</td><td>649568</td></tr><tr><td>Variants processed</td><td>49324</td></tr><tr><td>Variants filtered out</td><td>0</td></tr><tr><td>Novel / existing variants</td><td>-</td></tr><tr><td>Overlapped genes</td><td>242</td></tr><tr><td>Overlapped transcripts</td><td>940</td></tr><tr><td>Overlapped regulatory features</td><td>-</td></tr></table><hr/><h3 id="var_class">Variant classes</h3><div id="var_class_pie" style="width: 800px; height: 200px">&nbsp;</div><div id="var_class_table" style="width: 800px; height: 200px">&nbsp;</div><hr/><h3 id="var_cons">Consequences (most severe)</h3><div id="var_cons_pie" style="width: 800px; height: 400px">&nbsp;</div><div id="var_cons_table" style="width: 800px; height: 200px">&nbsp;</div><hr/><h3 id="consequences">Consequences (all)</h3><div id="consequences_pie" style="width: 800px; height: 400px">&nbsp;</div><div id="consequences_table" style="width: 800px; height: 200px">&nbsp;</div><hr/><h3 id="coding">Coding consequences</h3><div id="coding_pie" style="width: 800px; height: 400px">&nbsp;</div><div id="coding_table" style="width: 800px; height: 200px">&nbsp;</div><hr/><h3 id="chr">Variants by chromosome</h3><div id="chr_bar" style="width: 800px; height: 200px">&nbsp;</div><div id="chr_table" style="width: 800px; height: 200px">&nbsp;</div><hr/><h3 id="chr_1">Distribution of variants on chromosome 1</h3><div id="chr_1_area" style="width: 800px; height: 200px">&nbsp;</div><hr/><h3 id="protein">Position in protein</h3><div id="protein_bar" style="width: 800px; height: 200px">&nbsp;</div></div>
+</div></body>
+</html>
