@@ -3,7 +3,7 @@
 
 **Objective:-** The goal of this assignment was to annotate two given VCF files using Ensembl VEP in offline mode with a local cache and reference FASTA, and then carry out downstream analysis in Python (covered separately in a Jupyter Notebook).
 
-# Flowchart of assignment1
+### Flowchart of assignment1
 <img width="768" height="25" alt="assignment1_flowchart" src="https://github.com/user-attachments/assets/84ceff47-2252-4b48-b7c7-96bab2601bc6" />
 
 **Step 1: Environment Setup**
@@ -131,17 +131,26 @@ Test1_Test2_data_annotation_analysis.ipynb → jupyter notebook scripts for anno
 I began by setting up the VEP environment and downloading the required reference files. Initially, I tried using multiple sources (FASTA, GTF, and also ClinVar as a custom annotation). However, I ran into several issues along the way — corrupted downloads, very large FASTA size taking a lot of space, and repeated version mismatches between my installed VEP (115) and the available cache.
 To solve these, I verified each file with gunzip -t, used bgzip + tabix where needed, and focused on keeping only the essential files. After a few failed attempts with GTF/ClinVar, I decided to rely on the offline cache + FASTA combination, which finally gave me clean results.
 
-The key decisions I made were:
-Stick to cache + FASTA only for annotation (simpler and faster).
-Re-download and validate files whenever CRC errors appeared.
-Ensure the cache version exactly matched my VEP version.
-Manage space carefully, since the cache and FASTA files are quite large.
-## Another approach for this assignment could be to combine cache/FASTA with ClinVar or other custom annotation sources, but my final results were achieved successfully with cache + FASTA only.
+### Challenges Faced & Resolutions (Assignment 1)
+While working on the annotation, I faced multiple issues:
 
-## The downstream Python analysis (counts, unique genes/traits, pathogenic variants, chromosome distribution) was done in a separate Jupyter Notebook, which I will include as part of the final submission.
+-Cache version mismatch – My installed VEP was version 115, but initially I could not locate the correct GRCh37 cache. I resolved this by downloading the matching cache tarball and ensuring it was extracted under ~/.vep/homo_sapiens/115_GRCh37/.
+
+-Large file sizes and space constraints – The reference FASTA and cache files were large, leading to storage and performance concerns. I managed this by carefully validating downloads with gunzip -t, extracting only required files, and monitoring available disk space.
+
+-Corrupted ClinVar VCF file – The ClinVar file download resulted in CRC errors. To avoid delays, I chose not to use ClinVar as a custom annotation source and instead focused on completing the analysis with cache + FASTA.
+
+-File naming issues – The input VCFs had spaces in filenames which caused execution errors. I renamed them to use underscores for smooth execution.
+
+-By systematically verifying file integrity, matching versions, and simplifying the workflow to rely on cache + FASTA, I was able to generate consistent annotated outputs and complete the analysis successfully.
 
 
-# Assignment 2: Nextflow Pipeline for VEP Annotation
+#### Another approach for this assignment could be to combine cache/FASTA with ClinVar or other custom annotation sources, but my final results were achieved successfully with cache + FASTA only.
+
+#### The downstream Python analysis (counts, unique genes/traits, pathogenic variants, chromosome distribution) was done in a separate Jupyter Notebook, which I will include as part of the final submission.
+
+
+## Assignment 2: Nextflow Pipeline for VEP Annotation
 This assignment was about creating a Nextflow DSL2 pipeline for bulk annotation of VCF files using the Ensembl Variant Effect Predictor (VEP) in a containerized environment.
 The pipeline can:
 -Take input from a samples.csv file
@@ -150,7 +159,7 @@ The pipeline can:
 -Produce annotated .vcf.gz outputs
 -Generate workflow reports (report.html, timeline.html, trace.txt)
 
-# Flowchart of assignment2
+### Flowchart of assignment2
 <img width="768" height="66" alt="assignment2_flowchart" src="https://github.com/user-attachments/assets/99786a6e-e92f-4295-9dfd-8ea60ca8adec" />
 
 
@@ -221,7 +230,7 @@ cat .command.out
 docker run --rm -v /home/ritika/.vep:/opt/vep/.vep:ro ensemblorg/ensembl-vep:release_115.0 ls -lh /opt/vep/.vep
 
 
-## Key Decisions I Made
+### Key Decisions I Made
 
 Avoided tuple input channels: Since my VCFs were simple, I directly fed file paths without tuple destructuring.
 
@@ -239,6 +248,7 @@ test2_data_1.annotated.vcf.gz
 test2_data_1.annotated.vcf.gz_warnings.txt
 
 -All the files below generated or used during the assignment is uploaded:
+
 samples.csv  test1_data_1.vcf  test2_data_1.vcf   
 test2_data_1.annotated.vcf.gz  
 test2_data_1.annotated.vcf.gz_warnings.txt  
@@ -249,7 +259,19 @@ report.html  timeline.html  trace.txt
 
 <img width="819" height="686" alt="image" src="https://github.com/user-attachments/assets/a7c0dcd5-145a-42aa-acd9-33ee7ed51f92" />
 
-# Other options could be tried
+### Other options could be tried
 - Using Quay.io images directly (quay.io/ensemblorg/ensembl-vep:109.3)
 - Running VEP without cache (slower, but avoids cache mismatch)
 
+### Challenges Faced and Resolutions
+During the course of this assignment, I encountered several challenges which required iterative troubleshooting:
+
+-Cache Version Mismatch: Initially, VEP failed with the error “No cache found for homo_sapiens, version 109”. This happened because the cache I had downloaded was for version 115 while I was using the VEP 109 image. I resolved this by switching to the ensemblorg/ensembl-vep:release_115.0 image to ensure consistency with the cache files.
+
+-Memory Limitations in WSL2: The pipeline processes were exceeding the available memory since my system had only 3.8 GB allocated. To address this, I reduced the resource requirements in the Nextflow process to memory '3 GB' and set --fork 1 so that VEP runs in a lower-memory configuration.
+
+-Path Mounting Issues: At first, the VCF and cache files could not be located inside the container. This was fixed by explicitly mounting the host directories into the container through nextflow.config, ensuring that /mnt/d/clovertex_assignment was used for cache and /home/ritika/vep_minidata for the FASTA reference.
+
+-Unsupported Option Warnings: VEP issued warnings about options like no_update, no_plugins, and no_htslib. These originated from legacy configurations. Since they did not affect the output, I decided to proceed while ignoring these warnings.
+
+-Debugging Through Iterative Runs: Multiple trial-and-error runs were required. I frequently used the -resume flag, checked .command.sh, .command.err, and the Nextflow log files to debug errors. Through this iterative approach, I was able to successfully generate annotated .vcf.gz files as the final output.
