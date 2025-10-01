@@ -119,3 +119,5 @@ Manage space carefully, since the cache and FASTA files are quite large.
 # Another approach for this assignment could be to combine cache/FASTA with ClinVar or other custom annotation sources, but my final results were achieved successfully with cache + FASTA only.
 
 # The downstream Python analysis (counts, unique genes/traits, pathogenic variants, chromosome distribution) was done in a separate Jupyter Notebook, which I will include as part of the final submission.
+
+
